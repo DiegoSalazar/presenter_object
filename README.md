@@ -34,7 +34,7 @@ Create a subclass such as:
 class UserPresenter < PresenterObject::Base
   presents :user
 
-  def formatted_phone_number_or_something_fancy
+  def formatted_phone_number
     I18n.l phone_number, format: :fancy
   end  
 end
@@ -51,6 +51,7 @@ The `@user` presenter object can be used as if it were the model object. Then, j
 ```ruby
 @user.class # => User
 @user.respond_to? :first_name # => true
+@user.formatted_phone_number # => "(555) 444-3322"
 ```
 
 ## Development

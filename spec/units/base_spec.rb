@@ -1,6 +1,7 @@
 require "spec_helper"
 require "active_support/core_ext/string/inflections"
 require "presenter_object/base"
+require "support/mocks"
 
 describe PresenterObject::Base do
   let(:user) { User.new }
@@ -64,26 +65,4 @@ describe PresenterObject::Base do
       expect { user_presenter.non_existent }.to raise_error(NoMethodError)
     end
   end
-end
-
-# Mocks
-
-class User
-  def model_method
-    "called model method"
-  end
-end
-
-Post = Class.new
-
-class UserPresenter < PresenterObject::Base
-  presents :user
-
-  def presenter_method
-    "called presenter method"
-  end
-end
-
-class PostPresenter < PresenterObject::Base
-  presents :post
 end
