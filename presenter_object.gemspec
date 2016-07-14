@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = PresenterObject::VERSION
   spec.authors       = ["Diego Salazar"]
   spec.email         = ["diego.salazar@kipusystems.com"]
-
+  spec.license       = "MIT"
   spec.summary       = %q{Prsenter object base class.}
   spec.description   = %q{Useful for wrapping model objects with presentation methods.}
   spec.homepage      = "https://github.com/DiegoSalazar/presenter_object"
@@ -28,7 +28,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.12"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec"
-  spec.add_development_dependency "pry-rescue"
-  spec.add_development_dependency "activesupport"
+  spec.add_development_dependency "rspec", "~> 3.5"
+  spec.add_development_dependency "activesupport", "~> 4.2"
 end
