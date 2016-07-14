@@ -22,6 +22,6 @@ module PresenterObject::Presentable
   end
 
   def presenterize
-    presenter_class.new self
+    presenter_class.new self, nil
   end
 end

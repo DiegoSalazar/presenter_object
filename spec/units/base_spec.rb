@@ -6,7 +6,7 @@ require "support/mocks"
 describe PresenterObject::Base do
   let(:user) { User.new }
   let(:post) { Post.new }
-  let(:user_presenter) { UserPresenter.new user }
+  let(:user_presenter) { UserPresenter.new user, nil }
 
   context ".presents" do
     before(:each) { described_class.presents :something_cool }
@@ -40,13 +40,13 @@ describe PresenterObject::Base do
 
   context "#object" do
     it "is the wrapped object" do
-      expect(UserPresenter.new(user).object).to be user
+      expect(UserPresenter.new(user, nil).object).to be user
     end
   end
 
   context "#class" do
     it "is the wrapped object's class" do
-      expect(PostPresenter.new(post).class).to be Post
+      expect(PostPresenter.new(post, nil).class).to be Post
     end
   end
 
