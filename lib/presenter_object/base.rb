@@ -32,18 +32,27 @@ class PresenterObject::Base
     end
   end
 
-  attr_reader :object, :class
+  attr_reader :object, :class, :view_context
 
-  def initialize(object)
-    @object, @class = object, object.class
+  def initialize(object, view_context)
+    @object, @class, @view_context = object, object.class, view_context
   end
 
   def method_missing(name, *args, &block)
-    super unless object.respond_to? name
-    object.send name, *args, &block
+    if @object.respond_to? name
+      @object.send name, *args, &block
+    elsif @view_context.respond_to? name
+      @view_context.send name, *args, &block
+    else
+      super
+    end
   end
 
   def respond_to?(name, include_private = false)
-    object.respond_to? name, include_private or super
+    if @object.respond_to?(name, include_private) || @view_context.respond_to?(name, include_private)
+      true
+    else
+      super
+    end
   end
 end
