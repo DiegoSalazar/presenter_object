@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Prsenter object base class.}
   spec.description   = %q{Useful for wrapping model objects with presentation methods.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/DiegoSalazar/presenter_object"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
