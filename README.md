@@ -1,6 +1,6 @@
 # PresenterObject
 
-This is a simple presenter base class you can use to create model specific presenters.
+This is a simple presenter base class you can use to create model specific presenters. 
 
 ## Installation
 

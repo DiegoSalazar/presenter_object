@@ -32,10 +32,13 @@ class PresenterObject::Base
     end
   end
 
-  attr_reader :object, :class, :view_context
+  attr_reader :object, :class, :to_param, :view_context
 
   def initialize(object, view_context)
-    @object, @class, @view_context = object, object.class, view_context
+    @object = object
+    @class = object.class # impersonate object's class
+    @to_param = object.id # let link helpers know the object's id
+    @view_context = view_context
   end
 
   def method_missing(name, *args, &block)
