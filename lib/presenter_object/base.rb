@@ -34,7 +34,7 @@ class PresenterObject::Base
 
   attr_reader :object, :class, :to_param, :view_context
 
-  def initialize(object, view_context)
+  def initialize(object, view_context = nil)
     @object = object
     @class = object.class # impersonate object's class
     @to_param = object.id # let link helpers know the object's id
