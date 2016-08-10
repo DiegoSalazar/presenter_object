@@ -1,19 +1,12 @@
 require "spec_helper"
-require "active_support/concern"
-require "presenter_object/presentable"
-require "support/mocks"
-
-class User
-  include PresenterObject::Presentable
-end
 
 describe PresenterObject::Presentable do
-  let(:user) { User.new }
+  let(:user) { PresentableUser.new }
   let(:view_context) { double "view_context" }
 
   context "#presenterize" do
     it "returns the object wrapped in its presenter" do
-      expect(user.presenterize).to be_kind_of UserPresenter
+      expect(user.presenterize).to be_kind_of PresentableUserPresenter
     end
 
     it "accepts the view_context as an optional argument" do
@@ -24,7 +17,7 @@ describe PresenterObject::Presentable do
 
   context ".presenter_class" do
     it "is the presenter class" do
-      expect(User.presenter_class).to be UserPresenter
+      expect(PresentableUser.presenter_class).to be PresentableUserPresenter
     end
   end
 end

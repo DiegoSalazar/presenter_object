@@ -17,6 +17,9 @@
 #   document.class # is the wrapped object's class, helps it behave like models do in forms, link helpers etc.
 #
 class PresenterObject::Base
+  include PresenterObject::Delegation
+  attr_reader :object, :class, :to_param, :view_context
+
   class << self
     def presents(class_name)
       @class_name = class_name.to_s.classify
@@ -32,30 +35,10 @@ class PresenterObject::Base
     end
   end
 
-  attr_reader :object, :class, :to_param, :view_context
-
   def initialize(object, view_context = nil)
     @object = object
     @class = object.class # impersonate object's class
     @to_param = object.id # let link helpers know the object's id
     @view_context = view_context
-  end
-
-  def method_missing(name, *args, &block)
-    if @object.respond_to? name
-      @object.send name, *args, &block
-    elsif @view_context.respond_to? name
-      @view_context.send name, *args, &block
-    else
-      super
-    end
-  end
-
-  def respond_to?(name, include_private = false)
-    if @object.respond_to?(name, include_private) || @view_context.respond_to?(name, include_private)
-      true
-    else
-      super
-    end
   end
 end

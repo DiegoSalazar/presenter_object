@@ -1,7 +1,4 @@
 require "spec_helper"
-require "active_support/core_ext/string/inflections"
-require "presenter_object/base"
-require "support/mocks"
 
 describe PresenterObject::Base do
   let(:user) { User.new }
@@ -69,6 +66,10 @@ describe PresenterObject::Base do
 
     it "raise NoMethodError when neither presenter nor wrapped object respond_to a method" do
       expect { user_presenter.non_existent }.to raise_error(NoMethodError)
+    end
+
+    it "raises an error when method doesn't exist" do
+      expect { user_presenter.unknown_method }.to raise_error NoMethodError
     end
   end
 end
