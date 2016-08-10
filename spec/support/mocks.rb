@@ -1,10 +1,14 @@
 class User
+  attr_reader :id
+
   def model_method
     "called model method"
   end
 end
 
-Post = Class.new
+class Post
+  attr_reader :id
+end
 
 class UserPresenter < PresenterObject::Base
   presents :user

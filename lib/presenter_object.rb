@@ -1,6 +1,7 @@
 require "presenter_object/version"
+require "presenter_object/base"
+require "presenter_object/presentable"
 
 module PresenterObject
-  autoload :Base, "presenter_object/base"
-  autoload :Presentable, "presenter_object/presentable"
+
 end
