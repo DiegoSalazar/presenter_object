@@ -6,7 +6,8 @@ require "support/mocks"
 describe PresenterObject::Base do
   let(:user) { User.new }
   let(:post) { Post.new }
-  let(:user_presenter) { UserPresenter.new user, nil }
+  let(:view_context) { double "view_context", render: "hello" }
+  let(:user_presenter) { UserPresenter.new user, view_context }
 
   context ".presents" do
     before(:each) { described_class.presents :something_cool }
@@ -54,6 +55,11 @@ describe PresenterObject::Base do
     it "delegates methods to the wrapped object" do
       expect(user).to receive(:model_method).and_return "called model method"
       user_presenter.model_method
+    end
+
+    it "delegates method to the view_context" do
+      expect(view_context).to receive(:render).and_return "hello"
+      user_presenter.render
     end
 
     it "handles its own methods" do
