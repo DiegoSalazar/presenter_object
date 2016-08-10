@@ -54,6 +54,29 @@ The `@user` presenter object can be used as if it were the model object. Then, j
 @user.formatted_phone_number # => "(555) 444-3322"
 ```
 
+### Collection Presenter
+
+You can also wrap whole collections of objects at once. Create a collection presenter:
+
+```ruby
+class UserCollectionPresenter < PresenterObject::Collection
+  def render_table
+    each do |object|
+      # object is now wrapped in its presenter
+    end
+  end
+end
+```
+
+Instantiate the collection presenter by passing in an object collection and an optional view_context:
+
+```ruby
+@user_collection = UserCollectionPresenter.new User.all, view_context
+@user_collection.render_table
+```
+
+The `@user_collection` instance is an `Enumerable` and will lazily wrap each object when you iterate over the collection.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
