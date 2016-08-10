@@ -21,7 +21,7 @@ module PresenterObject::Presentable
     self.class.presenter_class
   end
 
-  def presenterize
-    presenter_class.new self, nil
+  def presenterize(view_context = nil)
+    presenter_class.new self, view_context
   end
 end
