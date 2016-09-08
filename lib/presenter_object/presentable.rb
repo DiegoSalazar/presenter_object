@@ -11,9 +11,13 @@
 module PresenterObject::Presentable
   extend ActiveSupport::Concern
 
+  PresenterNotRegistered = Class.new KeyError
+
   module ClassMethods
     def presenter_class
       PresenterObject::Base.presenters.fetch name
+    rescue KeyError
+      raise PresenterNotRegistered, "No presenter registered for #{name}. Is it defined and loaded?"
     end
   end
 
