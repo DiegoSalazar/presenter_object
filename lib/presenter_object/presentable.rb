@@ -15,7 +15,7 @@ module PresenterObject::Presentable
 
   module ClassMethods
     def presenter_class
-      PresenterObject::Base.presenters.fetch name
+      PresenterObject::Base.presenters.fetch name.demodulize
     rescue KeyError
       raise PresenterNotRegistered, "No presenter registered for #{name}. Is it defined and loaded?"
     end
