@@ -9,15 +9,18 @@
 # document = Document.find(params[:id]).presenterize
 #
 module PresenterObject::Presentable
-  extend ActiveSupport::Concern
-
   PresenterNotRegistered = Class.new KeyError
+  extend ActiveSupport::Concern
 
   module ClassMethods
     def presenter_class
-      PresenterObject::Base.presenters.fetch name.demodulize
+      PresenterObject::Base.presenters.fetch name
     rescue KeyError
-      raise PresenterNotRegistered, "No presenter registered for #{name}. Is it defined and loaded?"
+      if (presenter = PresenterObject.load_presenter!(name))
+        presenter
+      else
+        raise PresenterNotRegistered, "No presenter registered for #{name}. Is it defined and loaded?"
+      end
     end
   end
 

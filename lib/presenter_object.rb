@@ -7,5 +7,11 @@ require "presenter_object/presentable"
 require "presenter_object/collection"
 
 module PresenterObject
+  SUFFIX = "Presenter"
 
+  def self.load_presenter!(name)
+    Object.const_get "#{name}#{SUFFIX}"
+  rescue NameError
+    nil
+  end
 end
