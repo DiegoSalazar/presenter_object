@@ -9,9 +9,20 @@ require "presenter_object/collection"
 module PresenterObject
   SUFFIX = "Presenter"
 
+  # If your presenters are namespaced, add the namespace module to this array
+  # in case you have loading problems in development. This helps me find the presenter.
+  # e.g
+  # in /lib/initializers/presenter_object.rb
+  # PresenterObject.namespaces << MyAwesomeSpace
+  #
+  def self.namespaces
+    @namespaces ||= [Object]
+  end
+
   def self.load_presenter!(name)
-    Object.const_get "#{name}#{SUFFIX}"
-  rescue NameError
-    nil
+    namespaces.each do |space|
+      presenter = space.const_get "#{name}#{SUFFIX}" rescue nil
+      return presenter if presenter
+    end
   end
 end
