@@ -21,8 +21,10 @@ module PresenterObject
   end
 
   def self.load_presenter!(name)
-    namespaces.detect do |space|
-      space.const_get "#{name}#{SUFFIX}" rescue nil
-    end || DEFAULT_OBJECT
+    namespaces.each do |space|
+      presenter_class = space.const_get "#{name}#{SUFFIX}" rescue nil
+      return presenter_class if presenter_class
+    end
+    DEFAULT_OBJECT
   end
 end
