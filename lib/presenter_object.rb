@@ -7,6 +7,7 @@ require "presenter_object/presentable"
 require "presenter_object/collection"
 
 module PresenterObject
+  DEFAULT_OBJECT = Object
   SUFFIX = "Presenter"
 
   # If your presenters are namespaced, add the namespace module to this array
@@ -16,7 +17,7 @@ module PresenterObject
   # PresenterObject.namespaces << MyAwesomeSpace
   #
   def self.namespaces
-    @namespaces ||= [Object]
+    @namespaces ||= [DEFAULT_OBJECT]
   end
 
   def self.load_presenter!(name)
@@ -24,5 +25,6 @@ module PresenterObject
       presenter = space.const_get "#{name}#{SUFFIX}" rescue nil
       return presenter if presenter
     end
+    DEFAULT_OBJECT
   end
 end
