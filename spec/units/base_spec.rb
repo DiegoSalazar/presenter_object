@@ -6,6 +6,18 @@ describe PresenterObject::Base do
   let(:view_context) { double "view_context", render: "hello" }
   let(:user_presenter) { UserPresenter.new user, view_context }
 
+  context '#initialize' do
+    it 'allows primitive data types to be presented' do
+      p = TestPresenter.new(test: 'hash')
+      expect(p[:test]).to eq 'hash'
+    end
+
+    it 'allows other primitive data types to be presented' do
+      p = TestPresenter.new 1
+      expect(p < 2).to be true
+    end
+  end
+
   context ".presents" do
     before(:each) { described_class.presents :something_cool }
 

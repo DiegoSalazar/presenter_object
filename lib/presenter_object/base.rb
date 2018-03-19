@@ -1,5 +1,5 @@
 # Presenter superclass. Create your own presenter by sub-classing `PresenterObject::Base`
-# and declaring the name of the model it will present. 
+# and declaring the name of the model it will present.
 #
 # e.g:
 #
@@ -11,7 +11,7 @@
 #
 # Create a presenter instance by giving it a model instance e.g:
 #
-#   document = DocumentPresenter.new Document.find(params[:id]) 
+#   document = DocumentPresenter.new Document.find(params[:id])
 #   document.sender # can call any document model methods...
 #   document.pretty_sender # ...as well as any presenter defined method
 #   document.class # is the wrapped object's class, helps it behave like models do in forms, link helpers etc.
@@ -38,7 +38,7 @@ class PresenterObject::Base
   def initialize(object, view_context = nil)
     @object = object
     @class = object.class # impersonate object's class
-    @to_param = object.id # let link helpers know the object's id
+    @to_param = object.id if object.respond_to? :id # let link helpers know the object's id if it has one
     @view_context = view_context
   end
 end

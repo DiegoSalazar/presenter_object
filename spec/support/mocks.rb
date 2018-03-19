@@ -18,6 +18,10 @@ class UserPresenter < PresenterObject::Base
   end
 end
 
+class TestPresenter < PresenterObject::Base
+  # nothing needed
+end
+
 class PresentableUserPresenter < PresenterObject::Base
   presents :presentable_user
 
