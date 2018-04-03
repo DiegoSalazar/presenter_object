@@ -38,7 +38,14 @@ class PresenterObject::Base
   def initialize(object, view_context = nil)
     @object = object
     @class = object.class # impersonate object's class
-    @to_param = object.id if object.respond_to? :id # let link helpers know the object's id if it has one
+    @to_param = parameterize object
     @view_context = view_context
+  end
+
+  private
+
+  # let link helpers know the object's id
+  def parameterize(obj)
+    obj.respond_to?(:to_param) ? obj.to_param : obj.id.to_s
   end
 end
