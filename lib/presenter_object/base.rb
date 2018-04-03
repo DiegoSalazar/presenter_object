@@ -46,6 +46,12 @@ class PresenterObject::Base
 
   # let link helpers know the object's id
   def parameterize(obj)
-    obj.respond_to?(:to_param) ? obj.to_param : obj.id.to_s
+    if obj.respond_to? :to_param
+      obj.to_param
+    elsif obj.respond_to? :id
+      obj.id.to_s
+    else
+      ''
+    end
   end
 end
