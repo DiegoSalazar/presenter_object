@@ -1,8 +1,8 @@
 module PresenterObject::Delegation
   def method_missing(name, *args, &block)
-    if object.respond_to? name
+    if object.respond_to? name, true
       object.send name, *args, &block
-    elsif view_context.respond_to? name
+    elsif view_context.respond_to? name, true
       view_context.send name, *args, &block
     else
       super
