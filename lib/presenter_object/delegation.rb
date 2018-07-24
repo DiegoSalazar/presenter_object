@@ -9,7 +9,7 @@ module PresenterObject::Delegation
     end
   end
 
-  def respond_to?(name, include_private = false)
+  def respond_to?(name, include_private = true)
     if object.respond_to?(name, include_private) || view_context.respond_to?(name, include_private)
       true
     else
